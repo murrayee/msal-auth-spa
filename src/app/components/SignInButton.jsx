@@ -6,7 +6,7 @@ import { Button, Dropdown } from 'antd';
 export const SignInButton = () => {
   const { instance } = useMsal();
 
-  const handleLogin = (loginType) => {
+  const handleLogin = async (loginType) => {
     if (loginType === 'popup') {
       instance.loginPopup(loginRequest).catch((e) => {
         console.log(e);
@@ -14,6 +14,9 @@ export const SignInButton = () => {
     } else if (loginType === 'redirect') {
       instance.loginRedirect(loginRequest).catch((e) => {
         console.log(e);
+      });
+      instance.handleRedirectPromise().then((res) => {
+        console.log(res);
       });
     }
   };
